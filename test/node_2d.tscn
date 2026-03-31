@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://bu5krqvtvsyfi"]
+
+[ext_resource type="Texture2D" uid="uid://b63imlbsjapwm" path="res://Placeholder Tiles/Cyan.png" id="1_wtcfe"]
+[ext_resource type="Texture2D" uid="uid://b6yk868krbjdl" path="res://icon.svg" id="2_0e48y"]
+[ext_resource type="Script" uid="uid://davgdwnbdn53r" path="res://character_body_2d.gd" id="2_epypp"]
+[ext_resource type="Script" uid="uid://vwu3lraw0r1b" path="res://sprite_2d.gd" id="4_0hol4"]
+[ext_resource type="Script" uid="uid://c01q2ac3hpn5e" path="res://rigid_body_2d.gd" id="5_q6r6c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
+size = Vector2(38925, 189)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epypp"]
+size = Vector2(64, 64)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_q6r6c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q6r6c"]
+size = Vector2(52, 52)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-3279, 553)
+scale = Vector2(1216.38, 5.84375)
+texture = ExtResource("1_wtcfe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-3278.5, 554)
+shape = SubResource("RectangleShape2D_0e48y")
+disabled = true
+debug_color = Color(0.98215, 0, 0.364768, 0.42)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+visible = false
+position = Vector2(31, 29)
+motion_mode = 1
+script = ExtResource("2_epypp")
+gravity = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_0e48y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_epypp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(293, 50)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_0e48y")
+script = ExtResource("4_0hol4")
+gravity = 5
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(155, 36)
+physics_material_override = SubResource("PhysicsMaterial_q6r6c")
+constant_force = Vector2(-100, 0)
+script = ExtResource("5_q6r6c")
+engine_thrust = 500.0
+lift_coeficient = 5.0
+glider_velocity = 50.0
+grav = 30
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_0e48y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_q6r6c")
+
+[node name="Camera2D" type="Camera2D" parent="RigidBody2D"]
+enabled = false
